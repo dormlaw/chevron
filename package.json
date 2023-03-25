@@ -2,9 +2,9 @@
   "name": "chevron",
   "version": "0.0.1",
   "description": "CLI edu project",
-  "main": "bin/index.js",
+  "main": "bin/chevron.js",
   "scripts": {
-    "start": "node bin/index.js"
+    "start": "node bin/chevron.js"
   },
   "repository": {
     "type": "git",

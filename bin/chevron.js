@@ -22,4 +22,4 @@ function fancyWelcome() {
 process.stdin.on('data', (data) => {
     const command = data.toString().trim();
     commands(command);
-  });
+});

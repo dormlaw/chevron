@@ -1,8 +1,7 @@
 function commands(string) {
-    const [type] = string.split(' ');
-    let context = string.split(' ');
-    context.shift();
-    context = context.join(' ');
+    const data = string.split(' ');
+    const type = data.shift();
+    const context = data.join(' ');
     switch (type) {
         case 'help':
             console.log("echo \x1b[2mwill repeat your text\x1b[0m")

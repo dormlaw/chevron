@@ -1,0 +1,23 @@
+{
+  "name": "chevron",
+  "version": "0.0.1",
+  "description": "CLI edu project",
+  "main": "bin/index.js",
+  "scripts": {
+    "start": "node bin/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dormlaw/chevron.git"
+  },
+  "keywords": [
+    "CLI",
+    "edu"
+  ],
+  "author": "dormlaw",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/dormlaw/chevron/issues"
+  },
+  "homepage": "https://github.com/dormlaw/chevron#readme"
+}

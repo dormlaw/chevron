@@ -71,7 +71,6 @@ function wordl(words) {
 				answers.push(answer);
 				count--;
 				if (word === riddleWord) {
-					count--
 					monitor('winner')
 					process.stdin.removeAllListeners('data');
 					process.exit();

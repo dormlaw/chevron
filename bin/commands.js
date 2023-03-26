@@ -32,6 +32,7 @@ function commands(args) {
                 wordl(WORDS);
                 break
             case 'echo':
+                //TO DO echo converts letters from different layouts
                 const content = args.join(' ')
                 print("#c[did u say #esc[" + content + "]?]")
                 break

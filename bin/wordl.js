@@ -84,6 +84,8 @@ function wordl(words) {
 		}
 		if (count === 0) {
 			monitor('looser')
+			process.stdin.removeAllListeners('data');
+			process.exit();
 		}
 	});
 }

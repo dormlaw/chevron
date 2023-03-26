@@ -1,3 +1,5 @@
+const print = require('./colorizer')
+
 function commands(args) {
     const type = args.shift();
     if (!type) {
@@ -29,7 +31,7 @@ function commands(args) {
                 console.log("\x1b[2mdid u say \x1b[0m" + content + "\x1b[2m?\x1b[0m")
                 break
             default:
-                console.log("no such command")
+                console.error("no such command")
                 console.log("\x1b[2mtype \x1b[0m--help \x1b[2mto see list of commands\x1b[0m")
         }
     }

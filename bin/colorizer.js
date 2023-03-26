@@ -1,6 +1,7 @@
-function colorizer(string) {
+//parse html tags to ansi codes and logs into console
+function print(string) {
     
-    return data
+    return console.log(colorizedString);
 }
 
-module.exports = colorizer;
+module.exports = print;

@@ -14,12 +14,21 @@ function print(data) {
 
     //list of supported tags
     const TAGS = new Map([
-        ['c', '\x1b[2m'],
-        ['yellow', '\x1b[33m'],
-        ['error', '\x1b[31m'],
+        ['test', '\x1b[0m'],
+        ['esc', '\033[0m'],
+        ['c', '\033[2m'],
+        ['black', '\033[30m'],
+        ['blue', '\033[34m'],
+        ['yellow', '\033[33m'],
+        ['green', '\033[32m'],
+        ['red', '\033[31m'],
+        ['bgblue', '\033[44m'],
+        ['bgyellow', '\033[43m'],
+        ['bggreen', '\033[42m'],
+        ['bgred', '\033[41m'],
     ])
 
-    const string = data.toString();
+    const string = "#esc[" + data.toString() + "]";
     let colorizedString = '';
     let keyStack = [];
 
@@ -53,11 +62,6 @@ function print(data) {
         }
 
         colorizedString += char;
-
-        //all of strings in print() are ended with ANSI reset style code
-        if (i === string.length - 1) {
-            colorizedString += '\x1b[0m'
-        }
     }
 
     return console.log(colorizedString);

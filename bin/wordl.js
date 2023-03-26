@@ -1,5 +1,10 @@
 const print = require('./colorizer')
 
+const fs = require('fs');
+const jsonData = fs.readFileSync('./bin/WORDS.json');
+const jsonObj = JSON.parse(jsonData);
+const WORDS = jsonObj.words;
+
 function wordl(words) {
 
 	const monitor = (type) => {
@@ -85,6 +90,6 @@ function wordl(words) {
 }
 
 //temprorary words list, would be replaced by .json file
-const WORDS = ['печка', 'баран', 'комар']
+// const WORDS = ['печка', 'баран', 'комар']
 
 module.exports = { wordl, WORDS };

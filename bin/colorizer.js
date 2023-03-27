@@ -13,7 +13,6 @@
 function print(data) {
   // list of supported tags
   const TAGS = new Map([
-    ['test', '\x1b[0m'],
     ['esc', '\x1b[0m'],
     ['c', '\x1b[2m'],
     ['black', '\x1b[30m'],
@@ -37,7 +36,6 @@ function print(data) {
       const escapedChar = string.substr(i + 1, 1);
       colorizedString += escapedChar;
       i += 1;
-      continue;
     } else if (char === '#') {
       const tagEnd = string.indexOf('[', i);
       if (tagEnd !== -1) {
@@ -47,7 +45,6 @@ function print(data) {
           keyStack.push(key);
           colorizedString += key;
           i = tagEnd;
-          continue;
         }
       }
     } else if (char === ']' && keyStack.length !== 0) {
@@ -57,10 +54,9 @@ function print(data) {
         colorizedString += keyStack[keyStack.length - 2];
       }
       keyStack.pop();
-      continue;
+    } else {
+      colorizedString += char;
     }
-
-    colorizedString += char;
   }
 
   return console.log(colorizedString);

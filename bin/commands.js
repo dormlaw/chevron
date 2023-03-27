@@ -1,5 +1,5 @@
-const print = require('./colorizer');
-const { wordl, WORDS } = require('./wordl');
+import print from './colorizer.js';
+import { wordl, WORDS } from './wordl.js';
 
 function commands(args) {
     const type = args.shift();
@@ -43,4 +43,4 @@ function commands(args) {
     }
 }
 
-module.exports = commands;
+export default commands;

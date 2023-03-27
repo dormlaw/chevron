@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "CLI edu project",
   "main": "bin/chevron.js",
+  "type": "module",
+  "bin": {
+    "chevron": "bin/chevron.js"
+  },
   "scripts": {
     "start": "node bin/chevron.js"
   },

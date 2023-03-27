@@ -15,17 +15,17 @@ function print(data) {
     //list of supported tags
     const TAGS = new Map([
         ['test', '\x1b[0m'],
-        ['esc', '\033[0m'],
-        ['c', '\033[2m'],
-        ['black', '\033[30m'],
-        ['blue', '\033[34m'],
-        ['yellow', '\033[33m'],
-        ['green', '\033[32m'],
-        ['red', '\033[31m'],
-        ['bgblue', '\033[44m'],
-        ['bgyellow', '\033[43m'],
-        ['bggreen', '\033[42m'],
-        ['bgred', '\033[41m'],
+        ['esc', '\x1b[0m'],
+        ['c', '\x1b[2m'],
+        ['black', '\x1b[30m'],
+        ['blue', '\x1b[34m'],
+        ['yellow', '\x1b[33m'],
+        ['green', '\x1b[32m'],
+        ['red', '\x1b[31m'],
+        ['bgblue', '\x1b[44m'],
+        ['bgyellow', '\x1b[43m'],
+        ['bggreen', '\x1b[42m'],
+        ['bgred', '\x1b[41m'],
     ])
 
     const string = "#esc[" + data.toString() + "]";
@@ -67,4 +67,4 @@ function print(data) {
     return console.log(colorizedString);
 }
 
-module.exports = print;
+export default print;

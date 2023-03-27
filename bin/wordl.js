@@ -1,9 +1,9 @@
-const print = require('./colorizer')
+import print from './colorizer.js';
+import fs from 'fs';
 
-const fs = require('fs');
 const jsonData = fs.readFileSync('./bin/WORDS.json');
-const jsonObj = JSON.parse(jsonData);
-const WORDS = jsonObj.words;
+const data = JSON.parse(jsonData);
+const WORDS = data.words;
 
 function wordl(words) {
 
@@ -17,8 +17,10 @@ function wordl(words) {
 		print('#black[#bggreen[П]] О Е З Д - такая буква есть и она в нужном месте');
 		print('');
 		print(`Осталось ${count} попыток`);
-		for (let i = 0; i < answers.length; i++)
+		for (let i = 0; i < answers.length; i++) {
 			print(answers[i].join(' '))
+			print('');
+		}
 		if (type === 'error-length') {
 			print('');
 			print('Слово должно состоять из 5 букв');
@@ -38,7 +40,7 @@ function wordl(words) {
 		}
 		if (type === 'looser') {
 			print('К сожалению все попытки закончились');
-			print(`Верное слово было: ${riddle.join(' ')}`);
+			print(`Верное слово было: #black[#bggreen[${riddle.join(' ').toUpperCase()}]]`);
 		}
 	}
 
@@ -90,7 +92,4 @@ function wordl(words) {
 	});
 }
 
-//temprorary words list, would be replaced by .json file
-// const WORDS = ['печка', 'баран', 'комар']
-
-module.exports = { wordl, WORDS };
+export { wordl, WORDS };

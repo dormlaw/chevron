@@ -6,5 +6,8 @@ install-deps:
 publish:
 	npm publish --dry-run
 
+lint:
+	npx eslint .
+
 chevron:
 	node bin/chevron.js

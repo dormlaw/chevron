@@ -1,10 +1,7 @@
-import fs from 'fs';
-import print from './colorizer.js';
+import print from './utils/colorizer.js';
+import fancyWelcome from './utils/fancyWelcome.js';
 
-const jsonData = fs.readFileSync('./bin/WORDS.json');
-const WORDS = JSON.parse(jsonData).words;
-
-function wordl(words) {
+function wordle(words) {
   // starting code
   const riddleWord = words[Math.floor(Math.random() * words.length)];
   const riddle = riddleWord.split('');
@@ -12,8 +9,9 @@ function wordl(words) {
   const answers = [];
   const monitor = (type) => {
     console.clear();
+    fancyWelcome();
     print('#yellow[> SLOVO] - Отгадай слово из 5 букв за 5 попыток!');
-    print('#c[введите #esc[exit] - чтобы закончить]');
+    print('#c[введите #esc[exit] чтобы пкинуть игру]');
     print('');
     print('К О #black[#bgred[Ф]] Т А - такой буквы в слове нет');
     print('Т #black[#bgblue[А]] П О К - такая буква есть, но в другой позиции');
@@ -24,26 +22,28 @@ function wordl(words) {
       print(answers[i].join(' '));
       print('');
     }
-    if (type === 'error-length') {
-      print('');
-      print('Слово должно состоять из 5 букв');
-      print('Попробуйте ещё:');
-    }
-    if (type === 'error-word') {
-      print('');
-      print('Такого слова нет в словаре...');
-      print('Попробуйте ещё:');
-    }
-    if (type === 'guess') {
-      print('');
-      print('Введите Вашу догадку:');
-    }
-    if (type === 'winner') {
-      print('#yellow[Поздравляю, это верное слово!]');
-    }
-    if (type === 'looser') {
-      print('К сожалению все попытки закончились');
-      print(`Верное слово было: #black[#bggreen[${riddle.join(' ').toUpperCase()}]]`);
+    switch (type) {
+      case 'error-length':
+        print('');
+        print('Слово должно состоять из 5 букв');
+        print('Попробуйте ещё:');
+        break;
+      case 'error-word':
+        print('');
+        print('Такого слова нет в словаре...');
+        print('Попробуйте ещё:');
+        break;
+      case 'winner':
+        print('#yellow[Поздравляю, это верное слово!]');
+        break;
+      case 'looser':
+        print('К сожалению все попытки закончились');
+        print(`Верное слово было: #black[#bggreen[ ${riddle.join(' ').toUpperCase()} ]]`);
+        break;
+      default:
+        print('');
+        print('Введите Вашу догадку:');
+        break;
     }
   };
   monitor('guess');
@@ -74,7 +74,7 @@ function wordl(words) {
           process.stdin.removeAllListeners('data');
           process.exit();
         }
-        monitor('guess');
+        monitor();
       } else {
         monitor('error-word');
       }
@@ -89,4 +89,4 @@ function wordl(words) {
   });
 }
 
-export { wordl, WORDS };
+export default wordle;

@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import commands from '../src/commands.js';
+import commandHandler from '../src/commandHandler.js';
 
 const command = process.argv.slice(2);
-commands(command);
+commandHandler(command);

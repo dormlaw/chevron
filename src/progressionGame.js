@@ -22,14 +22,16 @@ function progressionGameInit() {
 }
 
 function progressionGameStart({ progression, answer }) {
-  print(progression.join(' '));
-  const question = readlineSync.question('Угадайте число');
+  print('');
+  print('#yellow[> pifagor] - Угадайте число в арифмтеической прогрессии:');
+  print(`  ${progression.join(' ')}`);
+  const question = readlineSync.question('  ');
   switch (question) {
     case answer.toString():
-      print('Ура');
+      print('  #green[Верно!]');
       break;
     default:
-      print('Попробуй ещё');
+      print('  Жаль, но ты дурак');
   }
 }
 

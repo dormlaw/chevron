@@ -16,7 +16,8 @@ function commandHandler(args) {
   const content = args.join(' ');
   if (!command) {
     fancyWelcome();
-    print('type #blue[--help] to see list of commands');
+    print(' type #blue[--help] to see list of commands');
+    print('');
   } else {
     switch (command) {
       case '-h':
@@ -30,12 +31,15 @@ function commandHandler(args) {
         break;
       case 'kadabra':
         if (content) {
-          print(`#c[did u say #esc[${fixLayout(content)}]?]`);
+          print(`#c[did u say #esc["${fixLayout(content)}]"?]`);
         } else {
-          print('please type anything');
+          print('    Usage:');
+          print('  #yellow[chevron] kadabra "<switch rus/eng layout and type whatever you want>"');
+          print('  #c[converts "Руддщ!..." to "Hello!..." and vice versa]');
         }
         break;
       case 'pifagor':
+        fancyWelcome();
         progressionGameStart(progressionGameInit());
         break;
       default:

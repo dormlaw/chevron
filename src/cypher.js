@@ -19,7 +19,7 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
     .split('')
     .map((letter) => (letter === ' ' ? '_' : letter));
 
-  console.log(messageArray);
+  // console.log(messageArray);
 
   // get starting points of rotors depending of key
   const rotationCounter = [];
@@ -33,36 +33,36 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
     }
   });
 
-  console.log(rotationCounter);
+  // console.log(rotationCounter);
 
   // start encrypting
   const encryptedArray = [];
   for (let i = 0; i < messageArray.length; i += 1) {
     const letter = messageArray[i];
     const inputIndex = alphabet.indexOf(letter);
-    console.log(inputIndex);
+    // console.log(inputIndex);
     let encryptedLetter = letter;
     if (inputIndex !== -1) {
       encryptedLetter = rotors[0][inputIndex];
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = rotors[1][encryptedLetter];
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = rotors[2][encryptedLetter];
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = reflector[encryptedLetter];
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = rotors[2].indexOf(encryptedLetter);
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = rotors[1].indexOf(encryptedLetter);
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = rotors[0].indexOf(encryptedLetter);
-      console.log(encryptedLetter);
+      // console.log(encryptedLetter);
       encryptedLetter = alphabet[encryptedLetter];
     }
     encryptedArray.push(encryptedLetter);
     // console.log(letter);
     // console.log(inputIndex);
-    console.log(encryptedLetter);
+    // console.log(encryptedLetter);
   }
 
   // return <spaces> and capital letters
@@ -80,4 +80,6 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
   return encryptedMessage;
 }
 
-console.log(encrypt('Hello, bro!', enigma));
+// console.log(encrypt('Hello, bro!', enigma));
+
+export { enigma, encrypt };

@@ -9,7 +9,7 @@ const enigma = {
   ],
 };
 
-function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
+function encrypt(message, { alphabet, reflector, rotors }, key = 'abb') {
   // preparing data for encryption
   // all letters to lower case
   // swap <space> with '_'
@@ -33,30 +33,69 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
     }
   });
 
-  // console.log(rotationCounter);
-
   // start encrypting
   const encryptedArray = [];
   for (let i = 0; i < messageArray.length; i += 1) {
     const letter = messageArray[i];
     const inputIndex = alphabet.indexOf(letter);
-    // console.log(inputIndex);
+    rotationCounter[0] += 1;
+    if (rotationCounter[0] >= alphabet.length) {
+      rotationCounter[0] = 0;
+      rotationCounter[1] += 1;
+    }
+    if (rotationCounter[1] >= alphabet.length) {
+      rotationCounter[1] = 0;
+      rotationCounter[2] += 1;
+    }
+    console.log(rotationCounter);
+    // ========= from here not working as intended
+    console.log(inputIndex);
     let encryptedLetter = letter;
     if (inputIndex !== -1) {
-      encryptedLetter = rotors[0][inputIndex];
-      // console.log(encryptedLetter);
-      encryptedLetter = rotors[1][encryptedLetter];
-      // console.log(encryptedLetter);
-      encryptedLetter = rotors[2][encryptedLetter];
-      // console.log(encryptedLetter);
+      if ((inputIndex + rotationCounter[0]) >= alphabet.length) {
+        encryptedLetter = rotors[0][(inputIndex + rotationCounter[0]) % alphabet.length];
+      } else {
+        encryptedLetter = rotors[0][inputIndex + rotationCounter[0]];
+      }
+      console.log(encryptedLetter);
+
+      if ((encryptedLetter + rotationCounter[1]) >= alphabet.length) {
+        encryptedLetter = rotors[1][(encryptedLetter + rotationCounter[1]) % alphabet.length];
+      } else {
+        encryptedLetter = rotors[1][encryptedLetter + rotationCounter[1]];
+      }
+      console.log(encryptedLetter);
+
+      if ((encryptedLetter + rotationCounter[2]) >= alphabet.length) {
+        encryptedLetter = rotors[2][(encryptedLetter + rotationCounter[2]) % alphabet.length];
+      } else {
+        console.log(encryptedLetter);
+        encryptedLetter = rotors[2][encryptedLetter + rotationCounter[2]];
+      }
+      console.log(encryptedLetter);
+
       encryptedLetter = reflector[encryptedLetter];
-      // console.log(encryptedLetter);
-      encryptedLetter = rotors[2].indexOf(encryptedLetter);
-      // console.log(encryptedLetter);
-      encryptedLetter = rotors[1].indexOf(encryptedLetter);
-      // console.log(encryptedLetter);
-      encryptedLetter = rotors[0].indexOf(encryptedLetter);
-      // console.log(encryptedLetter);
+      console.log(encryptedLetter);
+
+      if ((rotors[2].indexOf(encryptedLetter) - rotationCounter[2]) < 0) {
+        encryptedLetter = rotors[2].indexOf(encryptedLetter) - rotationCounter[2] + alphabet.length;
+      } else {
+        encryptedLetter = rotors[2].indexOf(encryptedLetter) + rotationCounter[2];
+      }
+      console.log(encryptedLetter);
+      if ((rotors[1].indexOf(encryptedLetter) - rotationCounter[1]) < 0) {
+        encryptedLetter = rotors[1].indexOf(encryptedLetter) - rotationCounter[1] + alphabet.length;
+      } else {
+        encryptedLetter = rotors[1].indexOf(encryptedLetter) + rotationCounter[1];
+      }
+      console.log(encryptedLetter);
+      if ((rotors[0].indexOf(encryptedLetter) - rotationCounter[0]) < 0) {
+        encryptedLetter = rotors[0].indexOf(encryptedLetter) - rotationCounter[0] + alphabet.length;
+      } else {
+        encryptedLetter = rotors[0].indexOf(encryptedLetter) + rotationCounter[0];
+      }
+      encryptedLetter = rotors[0][encryptedLetter];
+      console.log(encryptedLetter);
       encryptedLetter = alphabet[encryptedLetter];
     }
     encryptedArray.push(encryptedLetter);
@@ -64,7 +103,7 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
     // console.log(inputIndex);
     // console.log(encryptedLetter);
   }
-
+  // ========= to here not working
   // return <spaces> and capital letters
   // stringify encrypted message
   const encryptedMessage = encryptedArray.map((letter, index) => {
@@ -80,6 +119,7 @@ function encrypt(message, { alphabet, reflector, rotors }, key = 'abc') {
   return encryptedMessage;
 }
 
-// console.log(encrypt('Hello, bro!', enigma));
+console.log(encrypt(encrypt('a', enigma), enigma));
+console.log(25%26);
 
 export { enigma, encrypt };

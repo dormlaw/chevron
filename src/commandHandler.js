@@ -4,6 +4,7 @@ import print from './utils/colorizer.js';
 import fancyWelcome from './utils/fancyWelcome.js';
 import wordle from './wordle.js';
 import fixLayout from './fixLayout.js';
+import { TCPServer, TCPClient } from './chat.js';
 import { progressionGameInit, progressionGameStart } from './progressionGame.js';
 import { enigma, encrypt } from './cypher.js';
 
@@ -43,6 +44,13 @@ function commandHandler(args) {
       case 'pifagor':
         fancyWelcome();
         progressionGameStart(progressionGameInit());
+        break;
+      case 'chat=server':
+        const server = new TCPServer();
+        break;
+      case 'chat=client':
+        fancyWelcome();
+        const client = new TCPClient();
         break;
       case 'enigma':
         if (content) {

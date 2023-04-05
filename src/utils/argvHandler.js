@@ -3,10 +3,7 @@ import print from './colorizer.js';
 class argvHandler {
   constructor() {
     this.commands = {};
-  }
-
-  option(command, description, handler) {
-    this.commands[command] = { description, handler };
+    this.chainMarker = null;
   }
 
   help(description) {
@@ -17,6 +14,20 @@ class argvHandler {
     } else {
       console.error('only string or function can be an argument');
     }
+  }
+
+  command(command, description, handler) {
+    this.commands[command] = { description, handler, options: {} };
+    this.chainMarker = this.commands[command];
+    return this;
+  }
+
+  option(option) {
+    option.split(' ');
+    if (this.chainMarker) {
+      this.currentCommand.options[option] = true;
+    }
+    return this;
   }
 
   listen() {
